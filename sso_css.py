@@ -40,7 +40,7 @@ class CssApi:
             'Authorization': f'Bearer {self.token}',
         }
 
-    def get_idir_users(self, env: str,
+    def search_idir_user(self, env: str,
                       firstname: str = None,
                       lastname: str = None,
                       email: str = None,
@@ -61,7 +61,7 @@ class CssApi:
         else:
             return data
 
-    def get_bceid_user(self, env: str, guid: str):
+    def search_bceid_user(self, env: str, guid: str):
         resp = requests.get(f'{self.CSS_API_ROOT}/{env}/basic-business-bceid/users?guid={guid}',
                             headers=self.headers)
         resp.raise_for_status()
