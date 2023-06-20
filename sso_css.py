@@ -153,3 +153,18 @@ class CssApi:
                                 json=children,
                                 headers=self.headers)
             resp.raise_for_status()
+
+    def set_role(self, integration_id: int, env: str, username: str, roles: [str]):
+        """
+        Assign roles to a user.
+
+        :param integration_id: integration id (e.g. 1234)
+        :param env: integration environment (i.e. "dev", "test", or "prod")
+        :param username: {guid}@{idp}; e.g. "fohe4m5pn8clhkxmlho33sn1r7vr7m67@idir"
+        :param roles:   list of roles to add
+        :return:
+        """
+        resp = requests.post(f'{self.CSS_API_ROOT}/integrations/{integration_id}/{env}/users/{username}/roles',
+                             json=[{'name': role for role in roles}],
+                             headers=self.headers)
+        resp.raise_for_status()
